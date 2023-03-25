@@ -10,6 +10,6 @@ setup(
     packages=['postponed'],
     ext_modules=[],
     include_dirs=[],
-    install_requires=[]
+    install_requires=["typeguard"]
 )
 
