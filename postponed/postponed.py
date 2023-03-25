@@ -85,18 +85,3 @@ def execute_tasks_processes(tasks: Iterable[Callable[[], R]], max_workers: int) 
     futures = [pool.apply_async(task, ()) for task in tasks]
     results = [future.get() for future in futures]
     return results
-
-
-def tests()->None:
-    postponed_double = postponed(double)
-    task = postponed_double(5.0)
-    print(task())
-
-    tasks = [postponed(double)(value)for value in [3, 3, 4, 6]]
-    results_multihtread = execute_tasks_threads(tasks, max_workers=3)
-    results_multiprocess = execute_tasks_processes(tasks, max_workers=3)
-    print(results4)
-
-
-if __name__ == "__main__":
-    tests()
