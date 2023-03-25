@@ -1,6 +1,6 @@
 # postponed
 
-Deferred function evaluation with type checks
+Deferred function evaluation with run-time type checks.
 
 
 
