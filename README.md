@@ -4,7 +4,7 @@ Deferred function evaluation with static and run-time type checks.
 
 ## Motivation
 
-When using multiprocessing in python the typical implementation resemble this:
+When using multiprocessing in python the typical implementation resembles this:
 
 ```
 import multiprocessing
@@ -25,12 +25,12 @@ if __name__ == "__main__":
 ```
 
 This has several limits:
-* when writting the values for `argument` as tuples we do not get any help from the IDE to see the list of arguments expectd by the function `multiply`, which makes the process error prone when the list of argument is long.
-* we have to use positional argument instead of named arguments 
+* when writing the values for `argument` as tuples we do not get any help from the IDE to see the list of arguments expected by the function `repeat_string`, which makes the process error prone when the list of argument is long.
+* we must use positional argument instead of named arguments.
 
-Note that mypy is able to raise an error when some of the provided arguments in `arguments` have the wrong type, when one uses for example `arguments = [("a", 2), (2, 3)]`.
+Note that mypy does raise an error when some of the provided arguments in `arguments` have the wrong type, when one uses for example `arguments = [("a", 2), (2, 3)]`.
 
-Postpone allows to overcome these two limitations by enabling the IDE to provide useful code hints and by allowing the use of named arguments as iluustrated here:
+Postpone allows to overcome these two limitations by enabling the IDE to provide useful code hints and by allowing the use of named arguments as illustrated  here:
 ```
 from postponed import postponed, execute_tasks_processes, execute_tasks_threads
 def repeat_string(s: str, n: int) -> str:
@@ -58,7 +58,7 @@ In additionally, by using `check_inputs=True`, one can automatically check at ru
 
 ## Alternatives
 
-* Dask's [delayed decorator](https://dask.pydata.org/en/latest/delayed.html). Does not perform run-time type checks and requires to install Dask and all its dependencies. 
+* Dask's [delayed decorator](https://dask.pydata.org/en/latest/delayed.html). Does not perform run-time type checks and requires installing Dask and all its dependencies. 
 * [lazy python](https://pypi.org/project/lazy_python/). Does not perform run-time type checks and seems unmaintained. 
 
 
