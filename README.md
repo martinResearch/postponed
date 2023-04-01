@@ -1,6 +1,6 @@
 # Postponed
 
-Deferred function evaluation with static and run-time type checks.
+Delayed/Deferred/Lazy function evaluation with static and run-time type checks.
 
 ## Motivation
 
