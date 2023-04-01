@@ -65,7 +65,7 @@ In Visual Studio Code the code hint appears like this:
 
 Note that the signature of `postponed_repeat_string`, `(s: str, n: int) -> (() -> str)` is explicit and relatively easy to understand: it returns a callable that take not arguments and return a string.
 
-In additionally, by using `check_inputs=True`, one can automatically check at run time that the list of arguments and their type are conform with the function signature. The is done in the main process as early as possible when `postponed_repeat_string` is called by using [typeguard](https://pypi.org/project/typeguard/) under the hood. This allows to catch errors earlier, before the tasks executes on a subprocess which can make the code easier to debug and reduce the duration of the debugging loop.
+In addition, by using `check_inputs=True`, one can automatically check at run time that the list of arguments and their type are conform with the function signature. The is done in the main process as early as possible when `postponed_repeat_string` is called by using [typeguard](https://pypi.org/project/typeguard/) under the hood. This allows to catch errors earlier, before the tasks executes on a subprocess which can make the code easier to debug and reduce the duration of the debugging loop.
 
 ## Alternatives
 
