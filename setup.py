@@ -1,15 +1,19 @@
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+"""Setup script"""
 
-libname="postponed"
+from setuptools import setup, find_packages
+
+libname = "postponed"
+
 setup(
-    name = libname,
-    version="0.1",
-    packages=['postponed'],
-    ext_modules=[],
+    name=libname,
+    version="0.0.1",
+    author="Martin de La Gorce",
+    author_email="martin.delagorce@gmail.com",
+    description="Module to postpone the execution of a function.",
+    packages=find_packages(),
+    license="MIT",
+    ext_modules=[],  # additional source file(s)),
     include_dirs=[],
-    install_requires=["typeguard"]
+    package_data={},
+    install_requires=["typeguard"],
 )
-
