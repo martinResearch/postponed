@@ -1,15 +1,21 @@
+"""Deferred function evaluation with static and run-time type checks.
 
-from typing import Any, Dict, TypeVar, Callable, Generic, ParamSpec, Iterable, List
-from concurrent.futures import ThreadPoolExecutor
-import multiprocessing
+https://github.com/martinResearch/postponed/blob/main/README.md
+"""
 import inspect
+import multiprocessing
+from concurrent.futures import ThreadPoolExecutor
+from typing import Any, Callable, Dict, Generic, Iterable, List, ParamSpec, TypeVar
+
 from typeguard import check_type
 
 P = ParamSpec("P")
 R = TypeVar("R")
 
 
-def check_arguments(signature: inspect.Signature, args: P.args, kwargs: Dict[str, Any]) -> None:
+def check_arguments(
+    signature: inspect.Signature, args: P.args, kwargs: Dict[str, Any]  # type: ignore
+) -> None:
     # check all required parameters are provided
     all_args = kwargs.copy()
     for name, value in zip(signature.parameters.keys(), args):
@@ -17,7 +23,7 @@ def check_arguments(signature: inspect.Signature, args: P.args, kwargs: Dict[str
             raise ValueError(f"Argument {name} is provided twice")
         all_args[name] = value
 
-    for name, value in kwargs.items():
+    for name in kwargs.keys():
         if name not in signature.parameters:
             raise ValueError(f"Argument {name} not expected")
 
@@ -30,13 +36,13 @@ def check_arguments(signature: inspect.Signature, args: P.args, kwargs: Dict[str
     for name, value in all_args.items():
         assert name in signature.parameters
         expected_type = signature.parameters[name].annotation
-        check_type(argname=name, value=value, expected_type=expected_type)
+        check_type(value=value, expected_type=expected_type)
 
 
 class Task(Generic[P, R]):
     """Postponed evaluation of a function with arguments."""
 
-    def __init__(self, f:  Callable[P, R], args: P.args, kwargs: P.kwargs):
+    def __init__(self, f: Callable[P, R], args: P.args, kwargs: P.kwargs):  # type: ignore
         self.f = f
         self.args = args
         self.kwargs = kwargs
@@ -48,7 +54,7 @@ class Task(Generic[P, R]):
 class Postponed(Generic[P, R]):
     """Postponed version of a given function."""
 
-    def __init__(self, f:  Callable[P, R], check_inputs: bool = True):
+    def __init__(self, f: Callable[P, R], check_inputs: bool = True):
         self._f = f
         self.check_inputs = check_inputs
         if self.check_inputs:
@@ -60,7 +66,9 @@ class Postponed(Generic[P, R]):
         return Task(self._f, args, kwargs).__call__
 
 
-def postponed(f:  Callable[P, R], /, check_inputs: bool = True) -> Callable[P, Callable[[], R]]:
+def postponed(
+    f: Callable[P, R], /, check_inputs: bool = True
+) -> Callable[P, Callable[[], R]]:
     """Lazy version of a given function.
 
     If `check_inputs` is True then the input arguments and their types are checked as early as possible to fail fast.
@@ -68,19 +76,23 @@ def postponed(f:  Callable[P, R], /, check_inputs: bool = True) -> Callable[P, C
     Example:
     >>> p = postponed(print)(5)
     >>> p()
-        5    
+        5
     """
-    return PostponedFunc(f, check_inputs=check_inputs).__call__
+    return Postponed(f, check_inputs=check_inputs).__call__
 
 
-def execute_tasks_threads(tasks: Iterable[Callable[[], R]], max_workers: int) -> List[R]:
+def execute_tasks_threads(
+    tasks: Iterable[Callable[[], R]], max_workers: int
+) -> List[R]:
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         futures = [executor.submit(task) for task in tasks]
         results = [future.result() for future in futures]
     return results
 
 
-def execute_tasks_processes(tasks: Iterable[Callable[[], R]], max_workers: int) -> List[R]:
+def execute_tasks_processes(
+    tasks: Iterable[Callable[[], R]], max_workers: int
+) -> List[R]:
     pool = multiprocessing.Pool(processes=max_workers)
     futures = [pool.apply_async(task, ()) for task in tasks]
     results = [future.get() for future in futures]
