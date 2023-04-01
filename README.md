@@ -58,8 +58,8 @@ In additionn by using `check_inputs=True` we can automaically check at run time 
 
 ## Alternatives
 
-* Dask's [delayed decorator](https://dask.pydata.org/en/latest/delayed.html). Does not perform run-time type checks and require to install Dask and all its dependencies. 
-* [lazy python](https://pypi.org/project/lazy_python/). Does not perform run-time type checks. 
+* Dask's [delayed decorator](https://dask.pydata.org/en/latest/delayed.html). Does not perform run-time type checks and requires to install Dask and all its dependencies. 
+* [lazy python](https://pypi.org/project/lazy_python/). Does not perform run-time type checks and seems unmaintained. 
 
 
 
