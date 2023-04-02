@@ -16,4 +16,6 @@ setup(
     include_dirs=[],
     package_data={},
     install_requires=["typeguard"],
+    long_description=open('README.md', 'r').read(),
+    long_description_content_type='text/markdown',
 )
