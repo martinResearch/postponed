@@ -1,6 +1,7 @@
 """Test for the postponed module"""
-from postponed import postponed, execute_tasks_processes, execute_tasks_threads
 import multiprocessing
+
+from postponed import execute_tasks_processes, execute_tasks_threads, postponed
 
 
 def multiply(a: float, b: float) -> float:

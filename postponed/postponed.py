@@ -4,9 +4,10 @@ https://github.com/martinResearch/postponed/blob/main/README.md
 """
 import inspect
 import multiprocessing
-from concurrent.futures import ThreadPoolExecutor
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Callable, Dict, Generic, Iterable, List, TypeVar
+
 from typeguard import check_type
 
 if sys.version_info < (3, 10):

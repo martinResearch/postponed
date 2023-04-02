@@ -13,10 +13,5 @@ __all__ = [
     "check_arguments",
 ]
 
-from .postponed import (
-    postponed,
-    execute_tasks_threads,
-    execute_tasks_processes,
-    Task,
-    check_arguments,
-)
+from .postponed import (Task, check_arguments, execute_tasks_processes,
+                        execute_tasks_threads, postponed)
