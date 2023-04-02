@@ -10,6 +10,10 @@ by providing:
 * autocompletion when providing the list of argument to the postponed function in you IDE
 * optional runtime-check of the input arguments and their types, ahead of the execution in a thread or subprocess in order to fail faster in the main thread if there is an error on the the input arguments.
 
+# Installation
+
+The package is on [pypi](https://pypi.org/project/postponed/) and thus the installation can be done using `pip install postponed`.
+
 # Motivation
 
 The common approach to to use multiprocessing to run a function that takes several input arguments over several sub processes is to use `pool.starmap` as done in the following example:
