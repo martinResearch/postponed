@@ -73,6 +73,6 @@ In addition, by using `check_inputs=True`, one can automatically check at run ti
 
 * Dask's [delayed decorator](https://dask.pydata.org/en/latest/delayed.html). It soes not perform run-time type checks and requires installing Dask and all its dependencies.
 * [lazy python](https://pypi.org/project/lazy_python/). It does not perform run-time type checks and seems unmaintained.
-* Joblib's [delayed](https://joblib.readthedocs.io/en/latest/parallel.html). It does not propagate the type information. Using `delayed(repeat_string)(s=1, n="sdf")` with the `repeat_string` defined above does not cause mypy to raise any error and the delayed function signature is displaid as `(*args: Any, **kwargs: Any) -> tuple[Any, tuple, dict[str, Any]]` when doing autocompletion in Visual Studio Code, which is not very useful. There is an [open issue](https://github.com/joblib/joblib/issues/1176) to solve this. 
+* Joblib's [delayed](https://joblib.readthedocs.io/en/latest/parallel.html). It does not propagate the type information. Using `delayed(repeat_string)(s=1, n="sdf")` with the `repeat_string` defined above does not cause mypy to raise any error and the delayed function signature is displayed as `(*args: Any, **kwargs: Any) -> tuple[Any, tuple, dict[str, Any]]` when doing autocompletion in Visual Studio Code, which is not very useful. There is an [open issue](https://github.com/joblib/joblib/issues/1176) to solve this. 
 
 
