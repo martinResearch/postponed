@@ -1,5 +1,7 @@
 Delayed/Deferred/Lazy function evaluation with static and run-time type checks.
 
+![Python package](https://github.com/martinResearch/postponed/workflows/Python%20package/badge.svg)
+
 # Goal
 
 The goal of the `postponed` package is to provide an interface that allows the user to provide the input arguments to a function but postpone it evaluation to later.
