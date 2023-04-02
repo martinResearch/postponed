@@ -4,7 +4,7 @@ Delayed/Deferred/Lazy function evaluation with static and run-time type checks.
 
 # Goal
 
-The goal of the `postponed` package is to provide an interface that allows the user to provide the input arguments to a function but postpone it evaluation to later.
+The goal of the `postponed` package is to provide an interface that allows the user to provide the input arguments to a function but postpone its evaluation to later.
 This can be usefull to make parallelization through multithreading or multiprocessing less error-prone
 by providing:
 * autocompletion when providing the list of argument to the postponed function in you IDE
@@ -69,13 +69,13 @@ In Visual Studio Code the code hint appears like this:
 
 ![image](https://user-images.githubusercontent.com/18285382/229304858-7a292775-120e-4f95-8520-a80a1e70738e.png)
 
-Note that the signature of `postponed_repeat_string`, `(s: str, n: int) -> (() -> str)` is explicit and relatively easy to understand: it returns a callable that take not arguments and return a string.
+Note that the signature of `postponed_repeat_string`, `(s: str, n: int) -> (() -> str)` is explicit and relatively easy to understand: it returns a callable that takes no arguments and returns a string.
 
-In addition, by using `check_inputs=True`, one can automatically check at run time that the list of arguments and their type are conform with the function signature. The is done in the main process as early as possible when `postponed_repeat_string` is called by using [typeguard](https://pypi.org/project/typeguard/) under the hood. This allows to catch errors earlier, before the tasks executes on a subprocess which can make the code easier to debug and reduce the duration of the debugging loop.
+In addition, by using `check_inputs=True`, one can automatically check at run time that the list of arguments and their type are conform with the function signature. The is done in the main process as early as possible, when `postponed_repeat_string` is called by using [typeguard](https://pypi.org/project/typeguard/) under the hood. This allows to catch errors earlier, before the tasks are executed in a subprocess , which can make the code easier to debug and reduces the duration of the debugging loop.
 
 ## Alternatives
 
-* Dask's [delayed decorator](https://dask.pydata.org/en/latest/delayed.html). It soes not perform run-time type checks and requires installing Dask and all its dependencies.
+* Dask's [delayed decorator](https://dask.pydata.org/en/latest/delayed.html). It does not perform run-time type checks and requires installing Dask and all its dependencies.
 * [lazy python](https://pypi.org/project/lazy_python/). It does not perform run-time type checks and seems unmaintained.
 * Joblib's [delayed](https://joblib.readthedocs.io/en/latest/parallel.html). It does not propagate the type information. Using `delayed(repeat_string)(s=1, n="sdf")` with the `repeat_string` defined above does not cause mypy to raise any error and the delayed function signature is displayed as `(*args: Any, **kwargs: Any) -> tuple[Any, tuple, dict[str, Any]]` when doing autocompletion in Visual Studio Code, which is not very useful. There is an [open issue](https://github.com/joblib/joblib/issues/1176) to solve this. 
 
