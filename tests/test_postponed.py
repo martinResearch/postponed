@@ -12,7 +12,7 @@ def repeat_string(s: str, n: int) -> str:
     return s * n
 
 
-def tests() -> None:
+def tests_multiply() -> None:
     postponed_multiply = postponed(multiply)
     tasks = [postponed_multiply(a=1.0, b=2.0), postponed_multiply(a=3.0, b=4.0)]
 
@@ -54,4 +54,5 @@ def test_repeat_string() -> None:
 
 
 if __name__ == "__main__":
-    tests()
+    tests_multiply()
+    test_repeat_string
