@@ -35,8 +35,8 @@ if __name__ == "__main__":
 This has several limitations:
 * The IDE cannot provide autocompletion and code hints based of the signature of the function `repeat_string` when creating the list `arguments`
 which makes it more error prone than normal direct call to `repeat_string`.
-* You have to make sure you provide the argument in the right order (positional argument) and you cannot use named arguments.
-* If one use a runtime type checker like `typegard` using a decorator `@typechecked` on the function `repeat_string`, then the error will be raised in the subprocess which makes debugging harder.
+* You have to make sure you provide the arguments in the right order (positional arguments) and you cannot use named arguments.
+* If one uses a runtime type checker like `typegard` using a decorator `@typechecked` on the function `repeat_string`, then the error will be raised in the subprocess which makes debugging harder.
 
 Note that mypy does raise an error when some of the provided arguments in `arguments` have the wrong type. This is the case when one uses  `arguments = [("a", 2), (2, 3)]`for example.
 
