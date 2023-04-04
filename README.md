@@ -4,7 +4,7 @@ Delayed/Deferred/Lazy function evaluation with static and run-time type checks.
 
 # Goal
 
-The goal of the `postponed` package is to provide an interface that allows the user to provide the input arguments to a function but postpone its evaluation to later.
+The purpose of the delayed package is to offer a means for users to input function arguments while deferring its execution until a later time.
 This can be usefull to make parallelization through multithreading or multiprocessing less error-prone
 by providing:
 * autocompletion when providing the list of argument to the postponed function in you IDE
