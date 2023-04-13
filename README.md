@@ -4,9 +4,8 @@ Delayed/Deferred/Lazy function evaluation with static and run-time type checks.
 
 # Goal
 
-The purpose of the *postponed* package is to offer a means for users to input function arguments while deferring its execution until a later time.
-This can be usefull to make parallelization through multithreading or multiprocessing less error-prone
-by providing:
+The purpose of the *postponed* package is to offer a means for users to provide input arguments to a function while deferring its execution until a later time.
+This can be usefull to make parallelization through multithreading or multiprocessing less error-prone by providing:
 * autocompletion when providing the list of argument to the postponed function in you IDE
 * optional runtime-check of the input arguments and their types, ahead of the execution in a thread or subprocess in order to fail faster in the main thread if there is an error on the the input arguments.
 
@@ -37,8 +36,7 @@ if __name__ == "__main__":
 ```
 
 This has several limitations:
-* The IDE cannot provide autocompletion and code hints based of the signature of the function `repeat_string` when creating the list `arguments`
-which makes it more error prone than normal direct call to `repeat_string`.
+* The IDE cannot provide autocompletion and code hints based of the signature of the function `repeat_string` when creating the list `arguments` which makes it more error prone than normal direct call to `repeat_string`.
 * You have to make sure you provide the arguments in the right order (positional arguments) and you cannot use named arguments.
 * If one uses a runtime type checker like `typegard` using a decorator `@typechecked` on the function `repeat_string`, then the error will be raised in the subprocess which makes debugging harder.
 
