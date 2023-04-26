@@ -7,7 +7,7 @@ Delayed/Deferred/Lazy function evaluation with static and run-time type checks.
 The purpose of the *postponed* package is to offer a means for users to provide input arguments to a function while deferring its execution until a later time.
 This can be usefull to make parallelization through multithreading or multiprocessing less error-prone by providing:
 * autocompletion when providing the list of argument to the postponed function in you IDE
-* optional runtime-check of the input arguments and their types, ahead of the execution in a thread or subprocess in order to fail faster in the main thread if there is an error on the the input arguments.
+* optional runtime-check of the input arguments and their types, ahead of the execution in a thread or subprocess in order to fail faster in the main thread if there is an error on the input arguments.
 
 # Installation
 
