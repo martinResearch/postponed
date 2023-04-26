@@ -15,7 +15,7 @@ The package is on [pypi](https://pypi.org/project/postponed/) and thus the insta
 
 # Motivation
 
-The common approach to to use multiprocessing to run a function that takes several input arguments over several sub processes is to use `pool.starmap` as done in the following example:
+The common approach to run a function that takes several input arguments over several sub processes is to use `multiprocessing.Pool`'s `starmap` method as done in the following example:
 
 ```
 import multiprocessing
@@ -36,15 +36,15 @@ if __name__ == "__main__":
 ```
 
 This has several limitations:
-* The IDE cannot provide autocompletion and code hints based of the signature of the function `repeat_string` when creating the list `arguments` which makes it more error prone than normal direct call to `repeat_string`.
-* You have to make sure you provide the arguments in the right order (positional arguments) and you cannot use named arguments.
-* If one uses a runtime type checker like `typegard` using a decorator `@typechecked` on the function `repeat_string`, then the error will be raised in the subprocess which makes debugging harder.
+* The IDE cannot provide autocompletion or code hints based of the signature of the function `repeat_string` when creating the list `arguments` which makes it more error prone than normal direct call to `repeat_string`.
+* You cannot use named arguments and thus you have to make sure you provide the arguments in the right order (positional arguments) and .
+* If one uses a runtime type checker like `typegard` using a decorator `@typechecked` on the function `repeat_string`, then the error will be raised only when executed in the subprocess, which makes debugging harder.
 
 Note that mypy does raise an error when some of the provided arguments in `arguments` have the wrong type. This is the case when one uses  `arguments = [("a", 2), (2, 3)]`for example.
 
 # Solution
 
-Postpone allows to overcome these two limitations by enabling the IDE to provide useful code hints and by allowing the use of named arguments as illustrated  here:
+Postpone allows to overcome these limitations by enabling the IDE to provide useful code hints and by allowing the use of named arguments as illustrated  here:
 ```
 from postponed import postponed, execute_tasks_processes, execute_tasks_threads
 def repeat_string(s: str, n: int) -> str:
